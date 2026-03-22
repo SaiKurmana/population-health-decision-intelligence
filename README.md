@@ -14,9 +14,9 @@ This project demonstrates how to build domain-specific AI tools using the Model 
 
 It includes:
 
-* A population health MCP server for readmission risk assessment
-* AgentCore deployment for scalable tool hosting
-* Tool orchestration with LLMs for healthcare decision support
+* A population health MCP server for readmission risk assessment  
+* AgentCore deployment for scalable tool hosting  
+* Tool orchestration with LLMs for healthcare decision support  
 
 ---
 
@@ -32,6 +32,12 @@ population-health-decision-intelligence/
 │   ├── readmission_risk_agentcore.py
 │   ├── deploy_to_agentcore.py
 │   └── update_config.py
+│
+├── assets/
+│   ├── pop-health-mcp-tool-execution.jpg
+│   ├── agentcore-mcp-configuration.jpg
+│   ├── agentcore-tool-execution.jpg
+│   └── gray-zone-testing.jpg
 ```
 
 ---
@@ -40,12 +46,12 @@ population-health-decision-intelligence/
 
 Assess readmission risk for a patient using:
 
-* Age
-* Chronic conditions
-* ED visits
-* Inpatient admissions
-* Medication burden
-* Social determinants of health
+* Age  
+* Chronic conditions  
+* ED visits  
+* Inpatient admissions  
+* Medication burden  
+* Social determinants of health  
 
 **Example prompt:**
 
@@ -58,12 +64,63 @@ no transportation barrier, and not living alone.
 
 ---
 
+## 🧩 System Walkthrough (From Local Tool → Deployed Intelligence)
+
+This project follows a structured progression from building a domain-specific tool to deploying and testing it in a real orchestration environment.
+
+---
+
+### 1️⃣ Local MCP Tool Execution
+
+The population health MCP server is first validated locally.  
+This confirms that domain logic (readmission risk scoring) is correctly implemented and returns structured outputs.
+
+![Local MCP Tool Execution](assets/pop-health-mcp-tool-execution.jpg)
+
+---
+
+### 2️⃣ AgentCore Configuration
+
+The MCP server is then configured for deployment using AWS AgentCore.  
+This step transitions the tool from a local environment into a scalable runtime.
+
+![AgentCore Configuration](assets/agentcore-mcp-configuration.jpg)
+
+---
+
+### 3️⃣ Remote Tool Execution (AgentCore)
+
+Once deployed, the MCP server is invoked remotely through AgentCore.  
+Here, the model successfully selects the tool, passes correct parameters, and returns structured results.
+
+![AgentCore Tool Execution](assets/agentcore-tool-execution.jpg)
+
+---
+
+### 4️⃣ Gray Zone Testing (Sensitivity vs Specificity)
+
+A borderline clinical scenario is used to test how the system behaves under uncertainty.
+
+In this case:
+
+* The model sometimes **does not call the tool**  
+* Instead, it falls back to reasoning  
+
+This reveals an important limitation in tool orchestration:
+
+> Even when tools are available, models may not consistently use them.
+
+![Gray Zone Testing](assets/gray-zone-testing.jpg)
+
+---
+
 ## ⚡ Quick Start
 
 Clone the repository:
 
 ```
 git clone https://github.com/SaiKurmana/population-health-decision-intelligence.git
+
 cd population-health-decision-intelligence
 ```
 
@@ -84,19 +141,20 @@ python deploy_to_agentcore.py
 
 ## ⚙️ Tech Stack
 
-* Python
-* MCP (Model Context Protocol)
-* AWS Bedrock
-* AgentCore Runtime
+* Python  
+* MCP (Model Context Protocol)  
+* AWS Bedrock  
+* AgentCore Runtime  
 
 ---
 
 ## 🧠 What This Demonstrates
 
-* Tool-based AI architecture using MCP
-* Integration of clinical/population health logic into LLM workflows
-* Local vs remote (AgentCore) MCP deployment
-* Decision intelligence over raw model outputs
+* Tool-based AI architecture using MCP  
+* Integration of clinical/population health logic into LLM workflows  
+* Local vs remote (AgentCore) MCP deployment  
+* Decision intelligence over raw model outputs  
+* Real-world orchestration behavior (including tool usage gaps)  
 
 ---
 
@@ -106,9 +164,10 @@ Most AI demos stop at “the model can answer questions.”
 
 This project focuses on:
 
-* Embedding domain logic into tools
-* Structuring decisions, not just responses
-* Bridging healthcare data → actionable insight
+* Embedding domain logic into tools  
+* Structuring decisions, not just responses  
+* Bridging healthcare data → actionable insight  
+* Understanding when AI systems **fail to use available tools**  
 
 ---
 
